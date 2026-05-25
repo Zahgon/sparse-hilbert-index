@@ -23,27 +23,23 @@ public final class PositionRange {
     }
 
     public long maxHilbertIndex() {
-        return maxHilbertIndex;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long floorPosition() {
-        return floorPosition;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long ceilingPosition() {
-        return ceilingPosition;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     PositionRange join(PositionRange other) {
-        return new PositionRange(Math.max(maxHilbertIndex, other.maxHilbertIndex), //
-                Math.min(floorPosition, other.floorPosition), //
-                Math.max(ceilingPosition, other.ceilingPosition));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return "PositionRange [maxHilbertIndex=" + maxHilbertIndex + ", floorPosition=" + floorPosition
-                + ", ceilingPosition=" + ceilingPosition + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

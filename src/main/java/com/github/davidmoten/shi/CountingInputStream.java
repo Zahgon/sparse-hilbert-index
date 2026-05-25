@@ -6,8 +6,11 @@ import java.io.InputStream;
 final class CountingInputStream extends InputStream {
 
     private final InputStream in;
+
     private long count;
+
     private long startTime;
+
     private long ttfb;
 
     CountingInputStream(InputStream in, long startTime) {
@@ -17,22 +20,12 @@ final class CountingInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
-        int v = in.read();
-        postRead();
-        if (v != -1) {
-            count++;
-        }
-        return v;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int read(byte[] b, int off, int len) throws IOException {
-        int n = in.read(b, off, len);
-        postRead();
-        if (n != -1) {
-            count += n;
-        }
-        return n;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void postRead() {
@@ -43,15 +36,10 @@ final class CountingInputStream extends InputStream {
     }
 
     long count() {
-        long c = count;
-        count = 0;
-        return c;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     long readTimeToFirstByteAndSetToZero() {
-        long v = ttfb;
-        ttfb = 0;
-        return v;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

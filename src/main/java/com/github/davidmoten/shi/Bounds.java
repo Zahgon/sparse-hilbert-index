@@ -1,12 +1,12 @@
 package com.github.davidmoten.shi;
 
 import java.util.Arrays;
-
 import com.github.davidmoten.guavamini.Preconditions;
 
 public final class Bounds {
 
     private final double[] mins;
+
     private final double[] maxes;
 
     private Bounds(double[] a, double[] b) {
@@ -23,30 +23,23 @@ public final class Bounds {
     }
 
     public static Bounds create(double[] a, double[] b) {
-        return new Bounds(a, b);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean contains(double[] d) {
-        Preconditions.checkArgument(mins.length == d.length);
-        for (int i = 0; i < mins.length; i++) {
-            if (d[i] < mins[i] || d[i] > maxes[i]) {
-                return false;
-            }
-        }
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double[] mins() {
-        return mins;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double[] maxes() {
-        return maxes;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return "Bounds [mins=" + Arrays.toString(mins) + ", maxes=" + Arrays.toString(maxes) + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

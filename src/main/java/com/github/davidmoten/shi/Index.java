@@ -24,38 +24,40 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.function.Function;
-
 import org.davidmoten.hilbert.HilbertCurve;
 import org.davidmoten.hilbert.Range;
 import org.davidmoten.hilbert.Ranges;
 import org.davidmoten.hilbert.SmallHilbertCurve;
 import org.davidmoten.kool.Stream;
 import org.davidmoten.kool.function.BiFunction;
-
 import com.github.davidmoten.bigsorter.Reader;
 import com.github.davidmoten.bigsorter.Serializer;
 import com.github.davidmoten.bigsorter.Sorter;
 import com.github.davidmoten.bigsorter.Writer;
 import com.github.davidmoten.guavamini.Preconditions;
 import com.github.davidmoten.guavamini.annotations.VisibleForTesting;
-
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
 
 public final class Index<T> {
 
     private static final short VERSION = 1;
+
     private final TreeMap<Integer, Long> indexPositions;
+
     private final double[] mins;
+
     private final double[] maxes;
+
     private final SmallHilbertCurve hc;
+
     private final long count;
+
     private final Serializer<? extends T> serializer;
+
     private final Function<? super T, double[]> pointMapper;
 
-    Index(TreeMap<Integer, Long> indexPositions, double[] mins, double[] maxes, int bits,
-            long count, Serializer<? extends T> serializer,
-            Function<? super T, double[]> pointMapper) {
+    Index(TreeMap<Integer, Long> indexPositions, double[] mins, double[] maxes, int bits, long count, Serializer<? extends T> serializer, Function<? super T, double[]> pointMapper) {
         this.indexPositions = indexPositions;
         this.mins = mins;
         this.maxes = maxes;
@@ -66,40 +68,50 @@ public final class Index<T> {
     }
 
     public Serializer<? extends T> serializer() {
-        return serializer;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Function<? super T, double[]> pointMapper() {
-        return pointMapper;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static <T> Builder1<T> serializer(Serializer<? extends T> serializer) {
-        return new Builder1<T>(serializer);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static final class Builder {
+
         Builder() {
             // prevent instantiation externally
         }
 
         public <T> Builder1<T> serializer(Serializer<? extends T> serializer) {
-            return new Builder1<T>(serializer);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     public static final class Builder1<T> {
+
         private final Serializer<? extends T> serializer;
+
         Function<? super T, double[]> pointMapper;
+
         File input;
+
         File output;
+
         int bits;
+
         int dimensions;
+
         int numIndexEntriesApproximate = 10000;
+
         int sortMaxFilesPerMerge = 100;
+
         int sortMaxItemsPerFile = 100000;
 
         Builder1(Serializer<? extends T> serializer) {
@@ -107,8 +119,7 @@ public final class Index<T> {
         }
 
         public Builder2<T> pointMapper(Function<? super T, double[]> pointMapper) {
-            this.pointMapper = pointMapper;
-            return new Builder2<T>(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -121,38 +132,28 @@ public final class Index<T> {
         }
 
         public Builder3<T> input(File input) {
-            b.input = input;
-            return new Builder3<T>(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder3<T> input(String filename) {
-            return input(new File(filename));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> read(DataInputStream in) {
-            return Index.read(in, b.serializer, b.pointMapper);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> read(File file) {
-            try (DataInputStream in = new DataInputStream(
-                    new BufferedInputStream(new FileInputStream(file)))) {
-                return read(in);
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> read(URL url) {
-            try (DataInputStream in = new DataInputStream(
-                    new BufferedInputStream(url.openStream()))) {
-                return read(in);
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     public static final class Builder3<T> {
+
         private final Builder1<T> b;
 
         Builder3(Builder1<T> b) {
@@ -160,12 +161,11 @@ public final class Index<T> {
         }
 
         public Builder4<T> output(File output) {
-            b.output = output;
-            return new Builder4<T>(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder4<T> output(String output) {
-            return output(new File(output));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -178,10 +178,8 @@ public final class Index<T> {
         }
 
         public Builder5<T> bits(int bits) {
-            b.bits = bits;
-            return new Builder5<T>(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     public static final class Builder5<T> {
@@ -193,8 +191,7 @@ public final class Index<T> {
         }
 
         public Builder6<T> dimensions(int dimensions) {
-            b.dimensions = dimensions;
-            return new Builder6<T>(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -210,80 +207,54 @@ public final class Index<T> {
          * Sets the <i>approximate</i> number of index entries. The number required will
          * depend on where the chunking falls so can vary by a few from the desired
          * value.
-         * 
+         *
          * @param numIndexEntries approximate number of index entries
          * @return builder
          */
         public Builder6<T> numIndexEntries(int numIndexEntries) {
-            b.numIndexEntriesApproximate = numIndexEntries;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder6<T> sortMaxFilesPerMerge(int sortMaxFilesPerMerge) {
-            b.sortMaxFilesPerMerge = sortMaxFilesPerMerge;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder6<T> sortMaxItemsPerFile(int sortMaxItemsPerFile) {
-            b.sortMaxItemsPerFile = sortMaxItemsPerFile;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> createIndex(String filename) {
-            return createIndex(new File(filename));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> createIndex(File file) {
-            return createIndex().write(file);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Index<T> createIndex() {
-            try {
-                return Index.createIndex(b.input, b.serializer, b.pointMapper, b.output, b.bits,
-                        b.dimensions, b.numIndexEntriesApproximate, b.sortMaxFilesPerMerge,
-                        b.sortMaxItemsPerFile);
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     @VisibleForTesting
     TreeMap<Integer, Long> indexPositions() {
-        return indexPositions;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Fits the desired ranges to the effective querying ranges according to the
      * known index positions.
-     * 
+     *
      * @param ranges list of ranges in ascending order
      * @return querying ranges based on known index positions
      */
     public List<PositionRange> positionRanges(Iterable<Range> ranges) {
-        return positionRanges(indexPositions, ranges);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @VisibleForTesting
-    static List<PositionRange> positionRanges(TreeMap<Integer, Long> indexPositions,
-            Iterable<Range> ranges) {
-        LinkedList<PositionRange> list = new LinkedList<>();
-        for (Range range : ranges) {
-            if (range.low() <= indexPositions.lastKey()
-                    && range.high() >= indexPositions.firstKey()) {
-                Long startPosition = value(indexPositions.floorEntry((int) range.low()));
-                if (startPosition == null) {
-                    startPosition = indexPositions.firstEntry().getValue();
-                }
-                Long endPosition = value(indexPositions.higherEntry((int) range.high()));
-                if (endPosition == null) {
-                    endPosition = Long.MAX_VALUE;
-                }
-                PositionRange p = new PositionRange(range.high(), startPosition, endPosition);
-                append(list, p);
-            }
-        }
-        return list;
+    static List<PositionRange> positionRanges(TreeMap<Integer, Long> indexPositions, Iterable<Range> ranges) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static void append(LinkedList<PositionRange> list, PositionRange p) {
@@ -309,42 +280,31 @@ public final class Index<T> {
     }
 
     public double[] mins() {
-        return mins;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double[] maxes() {
-        return maxes;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Returns count of records in file indexed by this.
-     * 
+     *
      * @return count of records in file indexed by this.
      */
     public long count() {
-        return count;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long[] ordinates(double... d) {
-        Preconditions.checkArgument(d.length == mins.length);
-        long[] x = new long[d.length];
-        for (int i = 0; i < d.length; i++) {
-            if (mins[i] == maxes[i]) {
-                x[i] = 0;
-            } else {
-                x[i] = Math.round(((Math.min(d[i], maxes[i]) - mins[i]) / (maxes[i] - mins[i]))
-                        * hc.maxOrdinate());
-            }
-        }
-        return x;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SmallHilbertCurve hilbertCurve() {
-        return hc;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static <T> Index<T> read(DataInputStream dis, Serializer<? extends T> serializer,
-            Function<? super T, double[]> point) {
+    private static <T> Index<T> read(DataInputStream dis, Serializer<? extends T> serializer, Function<? super T, double[]> point) {
         try {
             // read version
             dis.readShort();
@@ -359,7 +319,6 @@ public final class Index<T> {
             long count = dis.readLong();
             int numEntries = dis.readInt();
             boolean useLongPositions = dis.readInt() == 1;
-
             TreeMap<Integer, Long> indexPositions = new TreeMap<Integer, Long>();
             for (int i = 0; i < numEntries; i++) {
                 int index = dis.readInt();
@@ -378,86 +337,45 @@ public final class Index<T> {
     }
 
     public Index<T> write(File idx) {
-        try (DataOutputStream dos = new DataOutputStream(
-                new BufferedOutputStream(new FileOutputStream(idx)))) {
-            write(dos);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Index<T> write(DataOutputStream dos) throws IOException {
-        try {
-            dos.writeShort(VERSION);
-            dos.writeInt(hc.bits());
-            dos.writeInt(hc.dimensions());
-            for (int i = 0; i < hc.dimensions(); i++) {
-                dos.writeDouble(mins[i]);
-                dos.writeDouble(maxes[i]);
-            }
-
-            dos.writeLong(count);
-
-            // num index entries
-            dos.writeInt(indexPositions.size());
-
-            boolean useLongPositions = Stream.from(indexPositions.values())
-                    .findFirst(x -> x > Integer.MAX_VALUE).get().isPresent();
-
-            // write 0 for int position
-            // write 1 for long position
-            dos.writeInt(useLongPositions ? 1 : 0);
-
-            for (Entry<Integer, Long> entry : indexPositions.entrySet()) {
-                dos.writeInt(entry.getKey());
-                long pos = entry.getValue();
-                if (useLongPositions) {
-                    dos.writeLong(pos);
-                } else {
-                    dos.writeInt((int) pos);
-                }
-            }
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static BiFunction<Long, Optional<Long>, InputStream> rafInputStreamFactory(File file) {
         return (first, last) -> {
             RandomAccessFile raf = createRaf(file);
             raf.seek(first);
-            return new ClosingInputStream( //
-                    new LimitingInputStream( //
-                            new BufferedInputStream(Channels.newInputStream(raf.getChannel())),
-                            last.orElse(Long.MAX_VALUE) - first),
-                    () -> raf.close());
+            return new //
+            ClosingInputStream(new //
+            LimitingInputStream(new BufferedInputStream(Channels.newInputStream(raf.getChannel())), last.orElse(Long.MAX_VALUE) - first), () -> raf.close());
         };
     }
 
     @VisibleForTesting
     Flowable<T> search(Bounds queryBounds, File file, PositionRange pr) throws IOException {
-        return search(queryBounds, rafInputStreamFactory(file), pr);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @VisibleForTesting
-    Flowable<T> search(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> factory,
-            PositionRange pr) throws IOException {
-        return Flowable.defer(() -> {
-            return getValues(factory, pr) //
-                    .takeUntil(rec -> hc.index(ordinates(pointMapper.apply(rec))) > pr
-                            .maxHilbertIndex()) //
-                    .filter(t -> queryBounds.contains(pointMapper.apply(t)));
-        });
+    Flowable<T> search(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> factory, PositionRange pr) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static final class Counts {
+
         final long startTime;
+
         long recordsRead;
+
         long recordsFound;
+
         long positionRanges;
+
         long bytesRead;
+
         long totalTimeToFirstByte;
 
         Counts() {
@@ -465,54 +383,25 @@ public final class Index<T> {
         }
 
         synchronized void incrementRecordsRead() {
-            recordsRead++;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         synchronized void incrementRecordsFoundAndAddTTFBAndAddBytesRead(long ttfb, long bytes) {
-            recordsFound++;
-            totalTimeToFirstByte += ttfb;
-            bytesRead += bytes;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     @VisibleForTesting
-    Flowable<WithStats<T>> searchWithStats(Bounds queryBounds,
-            BiFunction<Long, Optional<Long>, InputStream> factory, PositionRange pr, Counts counts)
-            throws IOException {
-        counts.positionRanges++;
-        CountingInputStream[] in = new CountingInputStream[1];
-        BiFunction<Long, Optional<Long>, InputStream> factoryWithCount = (x, y) -> {
-            long startTime = System.currentTimeMillis();
-            CountingInputStream is = new CountingInputStream(factory.apply(x, y), startTime);
-            in[0] = is;
-            return is;
-        };
-        return getValues(factoryWithCount, pr) //
-                .doOnNext(x -> counts.incrementRecordsRead()) //
-                .takeUntil(
-                        rec -> hc.index(ordinates(pointMapper.apply(rec))) > pr.maxHilbertIndex()) //
-                .filter(t -> queryBounds.contains(pointMapper.apply(t))) //
-                .doOnNext(x -> counts.incrementRecordsFoundAndAddTTFBAndAddBytesRead(
-                        in[0].readTimeToFirstByteAndSetToZero(), in[0].count())) //
-                .map(x -> {
-                    synchronized (counts) {
-                        return new WithStats<T>(x, counts.recordsRead, counts.recordsFound,
-                                counts.bytesRead, counts.totalTimeToFirstByte,
-                                counts.positionRanges,
-                                System.currentTimeMillis() - counts.startTime);
-                    }
-                });
+    Flowable<WithStats<T>> searchWithStats(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> factory, PositionRange pr, Counts counts) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private Flowable<T> getValues(BiFunction<Long, Optional<Long>, InputStream> factory,
-            PositionRange pr) {
+    private Flowable<T> getValues(BiFunction<Long, Optional<Long>, InputStream> factory, PositionRange pr) {
         return Flowable.defer(() -> {
             InputStream[] in = new InputStream[1];
             final Reader<? extends T> r;
             try {
-                Optional<Long> ceiling = pr.ceilingPosition() == Long.MAX_VALUE ? Optional.empty()
-                        : Optional.of(pr.ceilingPosition());
+                Optional<Long> ceiling = pr.ceilingPosition() == Long.MAX_VALUE ? Optional.empty() : Optional.of(pr.ceilingPosition());
                 // TODO don't block
                 in[0] = factory.apply(pr.floorPosition(), ceiling);
                 r = serializer.createReader(in[0]);
@@ -520,56 +409,55 @@ public final class Index<T> {
                 closeSilently(in[0]);
                 return Flowable.error(t);
             }
-            return Flowable.<T>generate( //
-                    emitter -> {
-                        T t;
-                        while (true) {
-                            t = r.read();
-                            if (t == null) {
-                                emitter.onComplete();
-                                break;
-                            } else {
-                                emitter.onNext(t);
-                                break;
-                            }
-                            // else keep reading till EOF or next record found within queryBounds
-                        }
-                    }) //
-                    .doOnCancel(() -> {
-                        closeSilently(r);
-                        closeSilently(in[0]);
-                    });
+            return //
+            Flowable.<//
+            T>//
+            generate(emitter -> {
+                T t;
+                while (true) {
+                    t = r.read();
+                    if (t == null) {
+                        emitter.onComplete();
+                        break;
+                    } else {
+                        emitter.onNext(t);
+                        break;
+                    }
+                    // else keep reading till EOF or next record found within queryBounds
+                }
+            }).//
+            doOnCancel(() -> {
+                closeSilently(r);
+                closeSilently(in[0]);
+            });
         });
     }
 
     @VisibleForTesting
     static void closeSilently(Closeable c) {
-        try {
-            if (c != null) {
-                c.close();
-            }
-        } catch (Throwable t) {
-            // do nothing
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int numEntries() {
-        return indexPositions.size();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SearchBuilder search(double[] a, double[] b) {
-        return search(Bounds.create(a, b));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SearchBuilder search(Bounds bounds) {
-        return new SearchBuilder(bounds);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public final class SearchBuilder {
 
         private final Bounds bounds;
+
         private int maxRanges;
+
         private int rangesBufferSize;
+
         private int concurrency = 1;
 
         SearchBuilder(Bounds bounds) {
@@ -577,59 +465,44 @@ public final class Index<T> {
         }
 
         public SearchBuilderWithStats withStats() {
-            return new SearchBuilderWithStats(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderAdvanced advanced() {
-            return new SearchBuilderAdvanced(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilder maxRanges(int maxRanges) {
-            this.maxRanges = maxRanges;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilder rangesBufferSize(int rangeBufferSize) {
-            this.rangesBufferSize = rangeBufferSize;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilder concurrency(int concurrency) {
-            Preconditions.checkArgument(concurrency > 0, "concurrency must be greater than zero");
-            this.concurrency = concurrency;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<T> file(File file) {
-            return Flowable.defer(() -> inputStreamFactory(rafInputStreamFactory(file)));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<T> file(String filename) {
-            return file(new File(filename));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public Flowable<T> inputStreamFactory(
-                BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
-            if (concurrency == 1) {
-                return search(bounds, inputStreamFactory, maxRanges, rangesBufferSize);
-            } else {
-                return advanced() //
-                        .inputStreamFactory(inputStreamFactory) //
-                        .flatMap(x -> x.subscribeOn(Schedulers.io()), concurrency);
-            }
+        public Flowable<T> inputStreamFactory(BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * Specify an HTTP url to use (server must support Range HTTP header)
          * @param url address
-         * @return stream 
+         * @return stream
          */
         public Flowable<T> url(String url) {
-            try {
-                return url(new URL(url));
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -638,7 +511,7 @@ public final class Index<T> {
          * @return stream
          */
         public Flowable<T> url(URL url) {
-            return inputStreamFactory(inputStreamForRange(url));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -651,30 +524,27 @@ public final class Index<T> {
         }
 
         public SearchBuilderWithStatsAdvanced withStats() {
-            return new SearchBuilderWithStatsAdvanced(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderAdvanced maxRanges(int maxRanges) {
-            b.maxRanges = maxRanges;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderAdvanced rangesBufferSize(int rangeBufferSize) {
-            b.rangesBufferSize = rangeBufferSize;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<T>> file(File file) {
-            return Flowable.defer(() -> inputStreamFactory(rafInputStreamFactory(file)));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<T>> file(String filename) {
-            return file(new File(filename));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public Flowable<Flowable<T>> inputStreamFactory(
-                BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
-            return searchAdvanced(b.bounds, inputStreamFactory, b.maxRanges, b.rangesBufferSize);
+        public Flowable<Flowable<T>> inputStreamFactory(BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -683,11 +553,7 @@ public final class Index<T> {
          * @return stream of streams
          */
         public Flowable<Flowable<T>> url(String url) {
-            try {
-                return url(new URL(url));
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -696,9 +562,8 @@ public final class Index<T> {
          * @return stream of streams
          */
         public Flowable<Flowable<T>> url(URL url) {
-            return inputStreamFactory(inputStreamForRange(url));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     public final class SearchBuilderWithStats {
@@ -710,52 +575,36 @@ public final class Index<T> {
         }
 
         public SearchBuilderWithStats maxRanges(int maxRanges) {
-            b.maxRanges = maxRanges;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderWithStats rangesBufferSize(int rangeBufferSize) {
-            b.rangesBufferSize = rangeBufferSize;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderWithStats concurrency(int concurrency) {
-            b.concurrency(concurrency);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderWithStatsAdvanced advanced() {
-            return new SearchBuilderWithStatsAdvanced(b);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<WithStats<T>> file(File file) {
-            return Flowable.defer(() -> inputStreamFactory(rafInputStreamFactory(file)));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public Flowable<WithStats<T>> inputStreamFactory(
-                BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
-            if (b.concurrency == 1) {
-                return searchWithStats(b.bounds, inputStreamFactory, b.maxRanges,
-                        b.rangesBufferSize);
-            } else {
-                return advanced() //
-                        .inputStreamFactory(inputStreamFactory) //
-                        .flatMap(x -> x.subscribeOn(Schedulers.io()), b.concurrency);
-            }
+        public Flowable<WithStats<T>> inputStreamFactory(BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<WithStats<T>> url(String url) {
-            try {
-                return url(new URL(url));
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<WithStats<T>> url(URL url) {
-            return inputStreamFactory(inputStreamForRange(url));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     public final class SearchBuilderWithStatsAdvanced {
@@ -767,41 +616,32 @@ public final class Index<T> {
         }
 
         public SearchBuilderWithStatsAdvanced maxRanges(int maxRanges) {
-            b.maxRanges = maxRanges;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public SearchBuilderWithStatsAdvanced rangesBufferSize(int rangeBufferSize) {
-            b.rangesBufferSize = rangeBufferSize;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<WithStats<T>>> file(File file) {
-            return Flowable.defer(() -> inputStreamFactory(rafInputStreamFactory(file)));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<WithStats<T>>> file(String filename) {
-            return file(new File(filename));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public Flowable<Flowable<WithStats<T>>> inputStreamFactory(
-                BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
-            return searchWithStatsAdvanced(b.bounds, inputStreamFactory, b.maxRanges,
-                    b.rangesBufferSize);
+        public Flowable<Flowable<WithStats<T>>> inputStreamFactory(BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<WithStats<T>>> url(String url) {
-            try {
-                return url(new URL(url));
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Flowable<Flowable<WithStats<T>>> url(URL url) {
-            return inputStreamFactory(inputStreamForRange(url));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     private static RandomAccessFile createRaf(File f) {
@@ -812,65 +652,54 @@ public final class Index<T> {
         }
     }
 
-    private Flowable<T> search(Bounds queryBounds,
-            BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges,
-            int rangesBufferSize) {
+    private Flowable<T> search(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges, int rangesBufferSize) {
         return Flowable.defer(() -> {
             long[] a = ordinates(queryBounds.mins());
             long[] b = ordinates(queryBounds.maxes());
             Ranges ranges = hc.query(a, b, maxRanges, rangesBufferSize);
-            return Flowable.fromIterable(positionRanges(ranges)) //
-                    .flatMap(pr -> search(queryBounds, inputStreamFactory, pr));
+            return //
+            Flowable.fromIterable(positionRanges(ranges)).flatMap(pr -> search(queryBounds, inputStreamFactory, pr));
         });
     }
 
-    private Flowable<Flowable<T>> searchAdvanced(Bounds queryBounds,
-            BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges,
-            int rangesBufferSize) {
+    private Flowable<Flowable<T>> searchAdvanced(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges, int rangesBufferSize) {
         return Flowable.defer(() -> {
             long[] a = ordinates(queryBounds.mins());
             long[] b = ordinates(queryBounds.maxes());
             // TODO make hc.query return a Flowable (lazy calculation)?
             Ranges ranges = hc.query(a, b, maxRanges, rangesBufferSize);
-            return Flowable.fromIterable(positionRanges(ranges)) //
-                    .map(pr -> search(queryBounds, inputStreamFactory, pr));
+            return //
+            Flowable.fromIterable(positionRanges(ranges)).map(pr -> search(queryBounds, inputStreamFactory, pr));
         });
     }
 
-    private Flowable<Flowable<WithStats<T>>> searchWithStatsAdvanced(Bounds queryBounds,
-            BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges,
-            int rangesBufferSize) {
+    private Flowable<Flowable<WithStats<T>>> searchWithStatsAdvanced(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges, int rangesBufferSize) {
         return Flowable.defer(() -> {
             long[] a = ordinates(queryBounds.mins());
             long[] b = ordinates(queryBounds.maxes());
             Ranges ranges = hc.query(a, b, maxRanges, rangesBufferSize);
             Counts counts = new Counts();
-            return Flowable.fromIterable(positionRanges(ranges)) //
-                    .map(pr -> searchWithStats(queryBounds, inputStreamFactory, pr, counts)) //
-                    .concatWith(Flowable.just(finalStats(counts)));
+            return //
+            Flowable.fromIterable(positionRanges(ranges)).map(//
+            pr -> searchWithStats(queryBounds, inputStreamFactory, pr, counts)).concatWith(Flowable.just(finalStats(counts)));
         });
     }
 
-    private Flowable<WithStats<T>> searchWithStats(Bounds queryBounds,
-            BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges,
-            int rangesBufferSize) {
+    private Flowable<WithStats<T>> searchWithStats(Bounds queryBounds, BiFunction<Long, Optional<Long>, InputStream> inputStreamFactory, int maxRanges, int rangesBufferSize) {
         return Flowable.defer(() -> {
             long[] a = ordinates(queryBounds.mins());
             long[] b = ordinates(queryBounds.maxes());
             Ranges ranges = hc.query(a, b, maxRanges, rangesBufferSize);
             Counts counts = new Counts();
-            return Flowable.fromIterable(positionRanges(ranges)) //
-                    .flatMap(pr -> searchWithStats(queryBounds, inputStreamFactory, pr, counts))
-                    .concatWith(finalStats(counts));
+            return //
+            Flowable.fromIterable(positionRanges(ranges)).flatMap(pr -> searchWithStats(queryBounds, inputStreamFactory, pr, counts)).concatWith(finalStats(counts));
         });
     }
 
     private Flowable<WithStats<T>> finalStats(Counts counts) {
         return Flowable.defer(() -> {
             synchronized (counts) {
-                return Flowable.just(new WithStats<T>(null, counts.recordsRead, counts.recordsFound,
-                        counts.bytesRead, counts.totalTimeToFirstByte, counts.positionRanges,
-                        System.currentTimeMillis() - counts.startTime));
+                return Flowable.just(new WithStats<T>(null, counts.recordsRead, counts.recordsFound, counts.bytesRead, counts.totalTimeToFirstByte, counts.positionRanges, System.currentTimeMillis() - counts.startTime));
             }
         });
     }
@@ -886,30 +715,30 @@ public final class Index<T> {
 
     @VisibleForTesting
     static String getRangeHeaderValue(long start, Optional<Long> end) {
-        return "bytes=" + start + end.map(x -> "-" + x).orElse("");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static <T> Index<T> createIndex( //
-            File input, //
-            Serializer<? extends T> serializer, //
-            Function<? super T, double[]> point, //
-            File output, //
-            int bits, //
-            int dimensions, //
-            int numIndexEntriesApproximate, //
-            int sortMaxFiles, //
-            int sortMaxItemsPerFile) //
-            throws IOException {
-
-        Preconditions.checkArgument(bits * dimensions <= 31,
-                "bits * dimensions must be at most 31");
-
+    private static <//
+    T> //
+    Index<T> //
+    createIndex(//
+    File input, //
+    Serializer<? extends T> serializer, //
+    Function<? super T, double[]> point, //
+    File output, //
+    int bits, //
+    int dimensions, //
+    int numIndexEntriesApproximate, //
+    int sortMaxFiles, //
+    int sortMaxItemsPerFile) throws IOException {
+        Preconditions.checkArgument(bits * dimensions <= 31, "bits * dimensions must be at most 31");
         // scan once to get the mins, maxes, count
         final double[] mins = new double[dimensions];
         final double[] maxes = new double[dimensions];
         long count = 0;
-        try (InputStream in = Util.bufferedInput(input); //
-                Reader<? extends T> reader = serializer.createReader(in)) {
+        try (//
+        InputStream in = Util.bufferedInput(input);
+            Reader<? extends T> reader = serializer.createReader(in)) {
             Arrays.setAll(mins, i -> Double.MAX_VALUE);
             Arrays.setAll(maxes, i -> Double.MIN_VALUE);
             T t;
@@ -917,9 +746,7 @@ public final class Index<T> {
                 count++;
                 double[] p = point.apply(t);
                 if (p.length != dimensions) {
-                    throw new IllegalArgumentException(
-                            "point function should be of length equal to number of dimensions but was: "
-                                    + Arrays.toString(p));
+                    throw new IllegalArgumentException("point function should be of length equal to number of dimensions but was: " + Arrays.toString(p));
                 }
                 for (int i = 0; i < p.length; i++) {
                     if (p[i] < mins[i]) {
@@ -931,41 +758,36 @@ public final class Index<T> {
                 }
             }
         }
-
         SmallHilbertCurve hc = HilbertCurve.small().bits(bits).dimensions(dimensions);
-
-        Sorter //
-                .serializer(serializer) //
-                .comparator((a, b) -> {
-                    double[] x = point.apply(a);
-                    double[] y = point.apply(b);
-                    return Integer.compare( //
-                            hilbertIndex(hc, x, mins, maxes), //
-                            hilbertIndex(hc, y, mins, maxes));
-                }) //
-                .input(input) //
-                .output(output) //
-                .maxFilesPerMerge(sortMaxFiles) //
-                .maxItemsPerFile(sortMaxItemsPerFile) //
-                .loggerStdOut() //
-                .sort();
-
+        //
+        Sorter.serializer(//
+        serializer).comparator((a, b) -> {
+            double[] x = point.apply(a);
+            double[] y = point.apply(b);
+            return //
+            Integer.//
+            compare(//
+            hilbertIndex(hc, x, mins, maxes), hilbertIndex(hc, y, mins, maxes));
+        }).//
+        input(//
+        input).output(//
+        output).maxFilesPerMerge(//
+        sortMaxFiles).maxItemsPerFile(//
+        sortMaxItemsPerFile).//
+        loggerStdOut().sort();
         long chunk = Math.max(1, count / numIndexEntriesApproximate);
-        TreeMap<Integer, Long> indexPositions = createIndexPositions(serializer, point, output,
-                mins, maxes, hc, chunk);
+        TreeMap<Integer, Long> indexPositions = createIndexPositions(serializer, point, output, mins, maxes, hc, chunk);
         return new Index<T>(indexPositions, mins, maxes, bits, count, serializer, point);
     }
 
-    private static <T> TreeMap<Integer, Long> createIndexPositions(Serializer<T> serializer,
-            Function<? super T, double[]> point, File output, final double[] mins,
-            final double[] maxes, SmallHilbertCurve hc, long chunk)
-            throws IOException, FileNotFoundException {
+    private static <T> TreeMap<Integer, Long> createIndexPositions(Serializer<T> serializer, Function<? super T, double[]> point, File output, final double[] mins, final double[] maxes, SmallHilbertCurve hc, long chunk) throws IOException, FileNotFoundException {
         TreeMap<Integer, Long> indexPositions = new TreeMap<>();
         try (//
-                InputStream in = Util.bufferedInput(output); //
-                Reader<T> reader = serializer.createReader(in);
-                CountingOutputStream counter = new CountingOutputStream();
-                Writer<T> writer = serializer.createWriter(counter)) {
+        //
+        InputStream in = Util.bufferedInput(output);
+            Reader<T> reader = serializer.createReader(in);
+            CountingOutputStream counter = new CountingOutputStream();
+            Writer<T> writer = serializer.createWriter(counter)) {
             T t;
             long position = 0;
             T lastT = null;
@@ -980,10 +802,8 @@ public final class Index<T> {
                     }
                 }
                 writer.write(t);
-
                 // must flush otherwise position may be wrong for the next pass through the loop
                 writer.flush();
-
                 lastT = t;
             }
             if (counter.count() % chunk != 0) {
@@ -996,12 +816,10 @@ public final class Index<T> {
         return indexPositions;
     }
 
-    private static int hilbertIndex(SmallHilbertCurve hc, double[] point, double[] mins,
-            double[] maxes) {
+    private static int hilbertIndex(SmallHilbertCurve hc, double[] point, double[] mins, double[] maxes) {
         long[] ordinates = new long[point.length];
         for (int i = 0; i < ordinates.length; i++) {
-            ordinates[i] = Math
-                    .round((point[i] - mins[i]) / (maxes[i] - mins[i]) * hc.maxOrdinate());
+            ordinates[i] = Math.round((point[i] - mins[i]) / (maxes[i] - mins[i]) * hc.maxOrdinate());
         }
         // can do this because bits * dimensions <= 31
         return (int) hc.index(ordinates);
@@ -1009,8 +827,6 @@ public final class Index<T> {
 
     @Override
     public String toString() {
-        return "Index [mins=" + Arrays.toString(mins) + ", maxes=" + Arrays.toString(maxes)
-                + ", numEntries=" + indexPositions.size() + "]";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

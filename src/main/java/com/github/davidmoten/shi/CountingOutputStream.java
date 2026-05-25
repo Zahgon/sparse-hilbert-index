@@ -9,16 +9,15 @@ final class CountingOutputStream extends OutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        count++;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void write(byte[] b, int off, int len) throws IOException {
-        count += len;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     long count() {
-        return count;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

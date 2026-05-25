@@ -5,16 +5,20 @@ import java.text.DecimalFormat;
 public final class WithStats<T> {
 
     private final T value;
+
     private final long recordsRead;
+
     private final long bytesRead;
+
     private final long recordsFound;
+
     private final long timeToFirstByte;
+
     private final long chunksRead;
+
     private final long elapsedTime;
 
-    WithStats(T value, long recordsRead, long recordsFound, long bytesRead, long timeToFirstByte,
-            long chunksRead, long elapsedTime) {
-
+    WithStats(T value, long recordsRead, long recordsFound, long bytesRead, long timeToFirstByte, long chunksRead, long elapsedTime) {
         this.value = value;
         this.recordsRead = recordsRead;
         this.recordsFound = recordsFound;
@@ -25,69 +29,47 @@ public final class WithStats<T> {
     }
 
     public boolean hasValue() {
-        return value != null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public T value() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long recordsRead() {
-        return recordsRead;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double hitRatio() {
-        return (double) recordsFound / recordsRead;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long bytesRead() {
-        return bytesRead;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long recordsFound() {
-        return recordsFound;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long timeToFirstByteMs() {
-        return timeToFirstByte;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double timeToFirstByteMsAverage() {
-        return (double) timeToFirstByte / chunksRead;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long chunksRead() {
-        return chunksRead;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long elapsedTimeMs() {
-        return elapsedTime;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("0.0000");
-        DecimalFormat df2 = new DecimalFormat("0.000");
-        StringBuilder b = new StringBuilder();
-        b.append("WithStats [");
-        b.append("elapsedMs=");
-        b.append(elapsedTimeMs());
-        b.append(", recordsFound=");
-        b.append(recordsFound);
-        b.append(", recordsRead=");
-        b.append(recordsRead);
-        b.append(", hitRatio=");
-        b.append(df.format(hitRatio()));
-        b.append(", bytesRead=");
-        b.append(df2.format(bytesRead / 1024.0 / 1024.0) + "m");
-        b.append(", timeToFirstByteMsTotal=");
-        b.append(timeToFirstByte);
-        b.append(", timeToFirstByteMsAverage=");
-        b.append(df.format(timeToFirstByteMsAverage()));
-        b.append(", chunksRead=");
-        b.append(chunksRead);
-        b.append("]");
-        return b.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

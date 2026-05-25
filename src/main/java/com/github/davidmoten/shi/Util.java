@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 final class Util {
-    
+
     private Util() {
         // prevent instantiation
     }
 
     static InputStream bufferedInput(File file) throws IOException {
-        return new BufferedInputStream(new FileInputStream(file));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
